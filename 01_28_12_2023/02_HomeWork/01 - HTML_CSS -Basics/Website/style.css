@@ -1,0 +1,23 @@
+body {
+    background-color: #347fb1; /* Replace with your desired color */
+}
+
+/* Keyframes for the fade-in and slide-up animation */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Applying the animation to all <h1> elements */
+h1 {
+    animation-name: fadeInSlideUp;
+    animation-duration: 2s;  /* Duration of the animation */
+    animation-fill-mode: both; /* Ensures the end state (opacity: 1) is retained after the animation */
+    font-size: xx-large;
+}
