@@ -1,0 +1,68 @@
+
+/* 1. Element-Name Selector */
+h1 {
+    color: brown;
+    text-align: center;
+}
+
+/* 2. Attribute Selector */
+input[type="text"] {
+    background-color: yellow;
+}
+
+/* 3. Class Selector */
+.amazing-elisra {
+    color: darkcyan;
+    background-color: lightsalmon;
+}
+
+/* 4. ID Selector */
+#lastPar {
+    color: maroon;
+    font-weight: bold;
+}
+
+/* 5. Pseudo Selector */
+p::first-letter {
+    color: blue;
+    font-size: x-large;
+}
+a:hover {
+    color: orange;
+}
+
+
+/* Direct Child */
+p > a {
+    color: red;
+}
+
+/* Any Child */
+p a {
+    background-color: green;
+}
+
+/* Both */
+h2, h3 {
+    text-align: center;
+    color: darkmagenta;
+}
+
+/* element + class */
+p.amazing-elisra {
+    text-decoration: underline;
+}
+
+h4 {
+    color: green !important;
+}
+
+/* Box Model */
+h5 {
+    margin: 30px;
+    border: 5px solid;
+    padding: 20px;
+    width: 300px;
+    height: 200px;
+    box-sizing: border-box;
+}
