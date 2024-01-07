@@ -1,0 +1,14 @@
+body{
+    background-color: darkgray;
+}
+
+#fullNameBox{
+    background-color: yellow;
+}
+
+#errorMessageH1{
+    color: blue;
+    border: 9px solid;
+    border-color: aqua;
+    background-color: red;
+}

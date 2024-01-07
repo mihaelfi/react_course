@@ -1,0 +1,38 @@
+html, body{
+    height: 100%;
+    margin: 0px;
+    text-align: center;
+    font-size: xx-large;
+    background-color: azure;
+    background-image: url("assets/images/alright.jpg");
+    background-size: cover;
+}
+
+.layout{
+    height: 100%;
+    border: 10px solid;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 10% 85% 5%;
+    grid-template-columns: 1fr 4fr 1fr; /* fr= fraction */
+}
+
+header{
+    grid-column: span 3;
+}
+
+menu{
+    grid-column: span 1;
+}
+
+aside{
+    grid-column: span 1;
+}
+
+footer{
+    grid-column: span 3;
+}
+
+ .layout > *{
+    border: 1px solid;
+ }

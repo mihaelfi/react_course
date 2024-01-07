@@ -1,0 +1,80 @@
+/* 1. Element-Name Selector (h1) */
+h1 {
+    color: red;
+    background-color: blue;
+    text-align: center;
+}
+
+/* 2. Attribute-Name Selector (filters for an attribute) */
+input[type="text"] {
+    color: yellow;
+    background-color: darkgreen;
+    text-align: center;
+}
+
+/* 3. Class Selector (Class name is a custom string) */
+.my-style {
+    color: palegreen;
+    background-color: darkorchid;
+    text-align: center;
+}
+
+/* 5. Pseudo selector */
+.my-style:hover {
+    color: aquamarine;
+    background-color: black;
+}
+
+
+/* 4. Id Selector */
+#lastPar {
+    color: red;
+    background-color: black;
+}
+
+
+a {
+    color: orange
+}
+
+a:hover {
+    color: lightblue;
+    background-color: black;
+}
+
+/* Direct child */
+p > a {
+    color: black;
+}
+
+/* Any Child */
+
+p a {
+   background-color: aquamarine;
+}
+
+/* both */
+h2,h3{
+    text-align: right;
+    color: aqua;
+    background-color: blueviolet;
+}
+
+/* element + class */
+p.my-style{
+    text-decoration: underline;
+}
+
+/* important overwrites everything before it */
+h4{
+    color: green !important;
+}
+
+h5{
+    margin: 30px;
+    border: 5px solid;
+    padding: 20px;
+    width: 300px;
+    height: 200px;
+    box-sizing: border-box;
+}
