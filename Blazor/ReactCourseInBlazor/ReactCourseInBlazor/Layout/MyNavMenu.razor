@@ -1,12 +1,51 @@
+@using System.Runtime.InteropServices.JavaScript
 <MudNavMenu>
     <MudNavLink Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
     <MudNavLink Href="/counter" Match="NavLinkMatch.Prefix">Servers</MudNavLink>
     <MudNavGroup Title="Course Homework" Expanded="false">
-        <MudNavGroup Title="Lecture 01" Expanded="false">
-            <MudNavLink Href="/Pages/Lecture01/Assignment"  Match="NavLinkMatch.Prefix">Assignment</MudNavLink>
-            <MudNavLink Href="/Pages/Lecture01/Solution/home"  Match="NavLinkMatch.Prefix">Solution</MudNavLink>
-        </MudNavGroup>
+        @foreach(var navigationEntry in _navEntries)
+        {
+            <MudNavGroup Title="@navigationEntry.Title" Expanded="false">
+                <MudNavLink Href="@navigationEntry.AssigmentPage" Match="NavLinkMatch.Prefix">Assignment</MudNavLink>
+                <MudNavLink Href="@navigationEntry.SolutionPage" Match="NavLinkMatch.Prefix">Solution</MudNavLink>
+            </MudNavGroup>    
+        }
     </MudNavGroup>
     <MudNavLink Href="#"  Match="NavLinkMatch.Prefix">About</MudNavLink>
 </MudNavMenu>
 
+@code
+{
+    private struct CourseHomeworkNavEntry
+    {
+        public int Index { get; set; }
+        public string Title => $"L{Index:00} {Date.ToString("dd MMM yy")}";
+        public string AssigmentPage => $"/Pages/Lecture{Index:00}/Assignment";
+        public string SolutionPage => $"/Pages/Lecture{Index:00}/Solution/Home";
+        public DateOnly Date { get; set; }
+    }
+
+    private List<CourseHomeworkNavEntry> _navEntries =
+    [
+        new CourseHomeworkNavEntry
+        {
+            Index = 1,
+            Date = new DateOnly(2023, 12, 28),
+        },
+
+        new CourseHomeworkNavEntry
+        {
+            Index = 2,
+            Date = new DateOnly(2024, 01, 04),
+        },
+
+        new CourseHomeworkNavEntry
+        {
+            Index = 3,
+            Date = new DateOnly(2024, 01, 11),
+        }
+
+    ];
+
+
+}
