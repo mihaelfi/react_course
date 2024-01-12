@@ -18,7 +18,7 @@
         <MyNavMenu/>
     </MudDrawer>
     <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.Medium">
+        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
             @Body
         </MudContainer>
     </MudMainContent>
@@ -27,7 +27,7 @@
 @code {
     bool _drawerOpen = true;
     private readonly MudTheme _theme = new();
-    private bool _isDarkMode = false;
+    private bool _isDarkMode = true;
     private string _darkModeToggleIcon = Icons.Material.Filled.DarkMode;
     
     

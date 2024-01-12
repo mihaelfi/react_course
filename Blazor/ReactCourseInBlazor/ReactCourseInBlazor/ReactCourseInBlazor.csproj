@@ -19,8 +19,4 @@
       </Content>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="wwwroot\assets\images\lecture01\" />
-    </ItemGroup>
-
 </Project>

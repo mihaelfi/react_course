@@ -1,6 +1,94 @@
 @page "/Pages/Lecture01/Solution/Home"
-<MudText Align="Align.Center" Typo="Typo.h2" Style="@($"color:{Colors.Green.Accent3};")">Solution</MudText>
+@using ReactCourseInBlazor.Layout.Lecture01
+@layout AnimalStoreMainLayout
+@inject IJSRuntime JavaScript
+@inject HttpClient Http
+
+<MudStack AlignItems="AlignItems.Center">
+
+    <MudImage
+        Src="@_currentSubtitle?.ImageSrc"
+        Width="400"
+        Fluid="true"
+        Alt="@_currentSubtitle?.Subtitle"
+        Elevation="25"
+        Class="rounded-lg"/>
+    <MudIconButton Icon="@Icons.Material.Filled.Cached" Color="Color.Primary" OnClick="@((e) => SetCurrentSubtitle())"></MudIconButton >
+    <MudText Typo="Typo.h5">@_currentSubtitle?.Subtitle</MudText>
+</MudStack>
+
+<MudDivider/>
 
 @code {
-    
+
+    private SiteSubtitle[]? _subtitles;
+    private Random? _random;
+    private SiteSubtitle? _currentSubtitle;
+
+
+    //Runs on initialization only
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _random = new Random();
+        _currentSubtitle = new SiteSubtitle();
+        _subtitles = await Http.GetFromJsonAsync<SiteSubtitle[]>("sample-data/Lecture01/animal_site_subtitles.json");
+    }
+
+    //Runs each time the page is navigated to.
+    protected override async Task OnParametersSetAsync()
+    {
+        await SetCurrentSubtitle();
+    }
+
+    private async Task SetCurrentSubtitle()
+    {
+        if (_subtitles == null || _random == null)
+        {
+            if (_currentSubtitle is not null)
+            {
+                _currentSubtitle.Subtitle = "Welcome to our shop.";
+                _currentSubtitle.ImageSrc = "#";
+            }
+        }
+        else
+        {
+            var prevSubtitle = _currentSubtitle;
+            do
+            {
+                var index = _random.Next(_subtitles.Length);
+                _currentSubtitle = _subtitles[index];
+            } while (prevSubtitle == _currentSubtitle);
+        }
+    }
+
+    public class SiteSubtitle
+    {
+        public string? Subtitle { get; set; }
+        public string? ImageSrc { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj.GetType() == this.GetType() && Equals((SiteSubtitle)obj);
+        }
+
+        private bool Equals(SiteSubtitle other)
+        {
+            return Subtitle == other.Subtitle && ImageSrc == other.ImageSrc;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Subtitle, ImageSrc);
+        }
+    }
+
+    //prints to javascript log (allegedly)
+    private async Task WriteLog(string logMessage)
+    {
+        await JavaScript.InvokeVoidAsync("console.log", logMessage);
+    }
+
 }

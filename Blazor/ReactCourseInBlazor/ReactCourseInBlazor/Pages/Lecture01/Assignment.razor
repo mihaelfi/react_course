@@ -1,15 +1,29 @@
 @page "/Pages/Lecture01/Assignment"
 
-<h3>Assignment: create an animal store webpage</h3>
+<MudStack AlignItems="AlignItems.Center">
+    <MudText Typo="Typo.h4">Assignment: create an animal store webpage</MudText>
+    <MudLink href="https://docs.google.com/document/d/1Z4SRM9dTxz2WJdL7jS41_skl_DysPf2I/edit" target="_blank">Assigment URL</MudLink>
+</MudStack>
 
-<ol>
-    <li>index.html - homepage</li>
-    <li>animals.html - images of animals</li>
-    <li>contact-us.html - form page</li>
-    <li>save.html - page displayed when the form data is "save"</li>
-    <li>bonus: after landing on the save.html page, redirect to the homepage after x seconds.</li>
-</ol>
+<MudList>
+    @for (int i = 0; i < _assignmentTasks.Count; i++)
+    {
+        var text = $"{i+1:00}. {_assignmentTasks[i]}";
+        <MudListItem Text=@text></MudListItem>    
+    }
+</MudList>
+
+
 
 @code {
-    
+
+    private readonly List<string> _assignmentTasks =
+    [
+        "Homepage - index.html, represents the site first page.",
+        "Animals - animals.html, displays the available animals for sale.",
+        "Contact Us - contact.html, a page with a form that allows the user to contact the page owner.",
+        "Save - save.html, a page that's displayed when the form is filled and sent successfully.",
+        "BONUS: after landing on the save.html page, redirect to the homepage after x seconds."
+    ];
+
 }
