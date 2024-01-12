@@ -1,0 +1,17 @@
+.Game > h2 {
+    color: blue;
+}
+
+.Game > p {
+    background-color: lightblue;
+}
+
+.Game > img{
+    width: 10em;
+}
+
+.Game{
+    border: 0.05em solid;
+    display: inline-block;
+    margin: 2%;
+}

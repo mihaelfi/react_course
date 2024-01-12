@@ -1,0 +1,12 @@
+.Sale > span{
+    text-shadow: 1cm;
+    background-color: rgb(205, 205, 238);
+}
+
+.Sale > img{
+    width: 10em;
+}
+
+.Sale{
+    color: brown;
+}

@@ -1,0 +1,18 @@
+.Game > h2 {
+    color: green;
+}
+ 
+.Game > p {
+    background-color: lightcoral;
+}
+
+.Game {
+    border: 1px solid;
+    width: 200px;
+    display: inline-block;
+    margin: 10px;
+}
+
+.Game > img {
+    width: 100px;
+}

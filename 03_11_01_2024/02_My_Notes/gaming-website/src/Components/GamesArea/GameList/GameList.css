@@ -1,0 +1,9 @@
+.GameList {
+	
+}
+
+
+.GameList > ul{
+    /* display: inline-block; */
+    text-align: left;
+}
