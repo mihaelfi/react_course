@@ -1,0 +1,73 @@
+@page "/Pages/Lecture01/Solution/ContactUs"
+@using ReactCourseInBlazor.Layout.Lecture01
+@layout AnimalStoreMainLayout
+@using FluentValidation
+@using System.Data
+
+<MudText Typo="Typo.h5" Align="Align.Left">Contact Us:</MudText>
+<br/>
+<MudDivider></MudDivider>
+
+<MudCard>
+    <MudForm Model="@_model" @ref="@_form" Validation="@(orderValidator.ValidateValue)" ValidationDelay="0" ></MudForm>
+    <MudCardContent>
+        <MudTextField UserAttributes="@InputAttributes" @bind-Value="_model.FirstName" For="@(() => _model.FirstName)" Immediate="true" Label="First Name"></MudTextField>
+        <MudTextField UserAttributes="@InputAttributes" @bind-Value="_model.LastName" For="@(() => _model.LastName)" Immediate="true" Label="Last Name"></MudTextField>
+        <MudTextField UserAttributes="@InputAttributes" @bind-Value="_model.Email" For="@(() => _model.Email)" Immediate="true" Label="Email"></MudTextField>
+        <MudTextField @bind-Value="_model.Message" Label="Message" Variant="Variant.Text" Lines="5" />
+    </MudCardContent>
+    <MudCardActions>
+        <MudStack Row="true">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(() => { Console.WriteLine("check"); })">Submit</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(() => { _form = new MudForm(); })">Reset</MudButton>    
+        </MudStack>
+    </MudCardActions>
+</MudCard>
+
+@code {
+
+    private FormModel _model = new FormModel();
+    private MudForm _form;
+
+    private Dictionary<string, object> InputAttributes { get; set; } =
+        new() 
+        {
+            { "autocomplete", "off" },
+        };
+   
+    
+    OrderModelFluentValidator orderValidator = new OrderModelFluentValidator();
+    
+    public class FormModel
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public int Gender { get; set; }
+        public string City { get; set; }
+        public string Message { get; set; }
+        
+    }
+
+    /// <summary>
+    /// A standard AbstractValidator which contains multiple rules and can be shared with the back end API
+    /// </summary>
+    /// <typeparam name="OrderModel"></typeparam>
+    public class OrderModelFluentValidator : AbstractValidator<FormModel>
+    {
+        public OrderModelFluentValidator()
+        {
+            RuleFor(x => x.FirstName).NotEmpty().Length(1, 10);
+            RuleFor(x => x.LastName).NotEmpty().Length(1, 10);
+            RuleFor(x => x.Email).Cascade(CascadeMode.Stop).NotEmpty().EmailAddress();
+            RuleFor(x => x.Gender).NotEmpty().InclusiveBetween(0, 1);
+
+        }
+        
+        public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
+        {
+            var result = await ValidateAsync(ValidationContext<FormModel>.CreateWithOptions((FormModel)model, x => x.IncludeProperties(propertyName)));
+            return result.IsValid ? Array.Empty<string>() : result.Errors.Select(e => e.ErrorMessage);
+        };
+    }
+}
