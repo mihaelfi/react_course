@@ -41,15 +41,13 @@
         await SetCurrentSubtitle();
     }
 
-    private async Task SetCurrentSubtitle()
+    private Task SetCurrentSubtitle()
     {
         if (_subtitles == null || _random == null)
         {
-            if (_currentSubtitle is not null)
-            {
-                _currentSubtitle.Subtitle = "Welcome to our shop.";
-                _currentSubtitle.ImageSrc = "#";
-            }
+            if (_currentSubtitle is null) return Task.CompletedTask;
+            _currentSubtitle.Subtitle = "Welcome to our shop.";
+            _currentSubtitle.ImageSrc = "#";
         }
         else
         {
@@ -58,8 +56,10 @@
             {
                 var index = _random.Next(_subtitles.Length);
                 _currentSubtitle = _subtitles[index];
-            } while (prevSubtitle == _currentSubtitle);
+            } while (Equals(prevSubtitle, _currentSubtitle));
         }
+
+        return Task.CompletedTask;
     }
 
     public class SiteSubtitle

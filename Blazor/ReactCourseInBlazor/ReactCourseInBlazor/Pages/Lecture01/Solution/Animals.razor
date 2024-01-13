@@ -1,52 +1,55 @@
 @page "/Pages/Lecture01/Solution/Animals"
 @using ReactCourseInBlazor.Layout.Lecture01
 @layout AnimalStoreMainLayout
-<h3>Animals</h3>
+@inject HttpClient Http
+
 
 <MudGrid Spacing="10" Justify="Justify.Center">
-    <MudItem xs="3">
-        <MudCard>
-            <MudCardMedia Image="assets/images/lecture01/animals/animals_01.png" Height="250" ></MudCardMedia>
-            <MudCardContent>
-                <MudText Typo="Typo.h5">Mark the Lion</MudText>
-                <MudText Typo="Typo.body2"></MudText>
-            </MudCardContent>
-            <MudCardActions>
-                <MudButton Variant="Variant.Text" Color="Color.Primary">Adopt</MudButton>
-                <MudButton Variant="Variant.Text" Color="Color.Primary">Share</MudButton>
-            </MudCardActions>
-        </MudCard>
-    </MudItem>
-    <MudItem xs="3">
-        <MudCard>
-            <MudCardMedia Image="assets/images/lecture01/animals/animals_01.png" Height="250" ></MudCardMedia>
-            <MudCardContent>
-                <MudText Typo="Typo.h5">Mark the Lion</MudText>
-                <MudText Typo="Typo.body2"></MudText>
-            </MudCardContent>
-            <MudCardActions>
-                <MudButton Variant="Variant.Text" Color="Color.Primary">Adopt</MudButton>
-                <MudButton Variant="Variant.Text" Color="Color.Primary">Share</MudButton>
-            </MudCardActions>
-        </MudCard>
-    </MudItem>
-    
-        <MudItem xs="3">
-            <MudCard>
-                <MudCardMedia Image="assets/images/lecture01/animals/animals_01.png" Height="250" ></MudCardMedia>
-                <MudCardContent>
-                    <MudText Typo="Typo.h5">Mark the Lion</MudText>
-                    <MudText Typo="Typo.body2"></MudText>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary">Adopt</MudButton>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary">Share</MudButton>
-                </MudCardActions>
+    @foreach (var entry in _cardEntries)
+    {
+        <MudItem xs="12" sm="6" md="4" lg="3" >
+            <MudCard Elevation="20">
+                <MudPaper Outlined="true">
+                    <img src="@entry.ImageSrc" alt="@entry.Description" class="fit-image"/>
+                    @* <MudCardMedia Image="assets/images/lecture01/animals/animals_01.png"></MudCardMedia> *@
+                    <MudCardContent>
+                        <MudText Typo="Typo.h5">@entry.Name</MudText>
+                        <MudText Typo="Typo.body2">@entry.Description</MudText>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Text" Color="Color.Primary">Adopt</MudButton>
+                        <MudButton Variant="Variant.Text" Color="Color.Primary">Share</MudButton>
+                    </MudCardActions>
+                </MudPaper>
             </MudCard>
         </MudItem>
-    
+    }
+
 </MudGrid>
 
+
 @code {
+
+    private CardEntry[]? _cardEntries;
     
+    public class CardEntry
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string ImageSrc { get; set; }
+    }
+    
+
+    protected override void OnInitialized()
+    {
+        _cardEntries = [];
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _cardEntries = await Http.GetFromJsonAsync<CardEntry[]>("sample-data/Lecture01/animals_listing.json");
+    }
+    
+    
+
 }
