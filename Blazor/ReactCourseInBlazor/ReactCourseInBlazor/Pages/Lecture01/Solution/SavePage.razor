@@ -1,0 +1,39 @@
+@page "/Pages/Lecture01/Solution/SavePage"
+@using ReactCourseInBlazor.Layout.Lecture01
+@using ReactCourseInBlazor.Services
+@using ReactCourseInBlazor.Common.Models.Lecture01
+@layout AnimalStoreMainLayout
+@inject DataService DataService
+@inject NavigationManager NavigationManager
+
+
+<MudText Typo="Typo.h3">Your feedback was saved!</MudText>
+<MudText Typo="Typo.h5">Feedback Content @_formModel</MudText>
+<br/>
+<MudDivider></MudDivider>
+<MudText Typo="Typo.h6">Rerouting to homepage in <span class="redirect-counter"> @_secondsToReroute </span> seconds</MudText>
+
+@code {
+    private int _secondsToReroute = 5;
+    private ContactUsFormModel _formModel = new ContactUsFormModel();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _formModel = DataService.FormModel;
+        StateHasChanged();  // force UI update
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        while (_secondsToReroute != 0)
+        {
+            await Task.Delay(1000); // delay for 1 second
+            _secondsToReroute--;
+            StateHasChanged();  // force UI update
+        }
+
+        NavigationManager.NavigateTo("/Pages/Lecture01/Solution/Home");
+    }
+}

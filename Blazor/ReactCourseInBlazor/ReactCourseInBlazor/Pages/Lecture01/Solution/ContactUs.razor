@@ -2,6 +2,10 @@
 @using ReactCourseInBlazor.Layout.Lecture01
 @layout AnimalStoreMainLayout
 @using FluentValidation
+@using ReactCourseInBlazor.Common.Models.Lecture01
+@using ReactCourseInBlazor.Services
+@inject DataService DataService
+@inject NavigationManager NavigationManager
 
 <MudText Typo="Typo.h5" Align="Align.Left">Contact Us:</MudText>
 <br/>
@@ -17,16 +21,19 @@
         </MudCardContent>
         <MudCardActions>
             <MudStack Row="true">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(() => { Console.WriteLine("check"); })">Submit</MudButton>
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(() => { _model = new FormModel(); })">Reset</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await Submit())">Submit</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(() => { _model = new ContactUsFormModel(); })">Reset</MudButton>
             </MudStack>
         </MudCardActions>
     </MudForm>
 </MudCard>
 
 @code {
+    
+    [Inject] ISnackbar? Snackbar { get; set; }
+    
 
-    private FormModel _model = new();
+    private ContactUsFormModel _model = new();
     private MudForm? _form;
 
     private Dictionary<string, object> InputAttributes { get; set; } =
@@ -35,24 +42,13 @@
             { "autocomplete", "off" },
         };
 
-
-    OrderModelFluentValidator _orderValidator = new();
-
-    public class FormModel
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public int Gender { get; set; }
-        public string City { get; set; }
-        public string Message { get; set; }
-    }
+    readonly OrderModelFluentValidator _orderValidator = new();
 
     /// <summary>
     /// A standard AbstractValidator which contains multiple rules and can be shared with the back end API
     /// </summary>
     /// <typeparam name="OrderModel"></typeparam>
-    public class OrderModelFluentValidator : AbstractValidator<FormModel>
+    public class OrderModelFluentValidator : AbstractValidator<ContactUsFormModel>
     {
         public OrderModelFluentValidator()
         {
@@ -64,9 +60,33 @@
 
         public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
         {
-            var result = await ValidateAsync(ValidationContext<FormModel>.CreateWithOptions((FormModel)model, x => x.IncludeProperties(propertyName)));
+            
+            var result = await ValidateAsync(ValidationContext<ContactUsFormModel>.CreateWithOptions((ContactUsFormModel)model, x => x.IncludeProperties(propertyName)));
             return result.IsValid ? Array.Empty<string>() : result.Errors.Select(e => e.ErrorMessage);
         };
+    }
+    
+    private async Task Submit()
+    {
+        Console.WriteLine($"Submitting form...");
+        if (_form != null)
+        {
+            await _form.Validate();
+
+            if (_form.IsValid)
+            {
+                Console.WriteLine($"Form Valid...");
+                Snackbar?.Add("Submitted!");
+                DataService.FormModel = _model;
+                await Task.Delay(500); // delay for 2 seconds
+                NavigationManager.NavigateTo("/Pages/Lecture01/Solution/SavePage");
+            }
+            else
+            {
+                Console.WriteLine($"Form not valid");    
+            }
+            
+        }
     }
 
 }
