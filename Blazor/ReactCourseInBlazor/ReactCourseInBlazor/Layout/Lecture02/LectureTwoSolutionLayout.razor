@@ -1,0 +1,61 @@
+@using ReactCourseInBlazor.Services
+@inherits LayoutComponentBase
+
+@layout MainLayout;
+
+@inject DataService DataService
+
+<MudText Align="Align.Center" Typo="Typo.h2" Color="Color.Primary">@_title</MudText>
+
+<MudStack Row="true" Justify="Justify.Center" Spacing="10">
+    <MudLink Href="/Pages/Lecture02/Solution/Home">Home</MudLink>
+    <MudLink Href="/Pages/Lecture02/Solution/TaskOneSolution">Storage</MudLink>
+    <MudLink Href="/Pages/Lecture02/Solution/TaskTwoSolution">Ajax</MudLink>
+</MudStack>
+
+<br/>
+<MudDivider/>
+<br/>
+
+<div>
+@Body    
+</div>
+
+
+@code {
+
+    private string? _title;
+
+    protected override void OnInitialized()
+    {
+        _title = DataService.LectureTwoSolutionTitle;
+        
+        // Registering the state change event, StateHasChanged is a built in function that trigger UI re-render.
+        DataService.OnChange += OnDataServiceDataChanged;
+    }
+
+    private void OnDataServiceDataChanged()
+    {
+        if (_title == null || !_title.Equals(DataService.LectureTwoSolutionTitle))
+        {
+            _title = DataService.LectureTwoSolutionTitle;
+            StateHasChanged();
+        }
+        
+        Console.WriteLine($"[OnDataServiceDataChanged]: Current title={_title}");
+        
+    }
+
+    // protected override void OnParametersSet()
+    // {
+    //     //Update _title each time parameters are set (state changes)
+    //     _title = DataService.LectureTwoSolutionTitle;
+    // }
+
+    // It's important to unsubscribe when the component is disposed of
+    public void Dispose()
+    {
+        DataService.OnChange -= StateHasChanged;
+    }
+
+}

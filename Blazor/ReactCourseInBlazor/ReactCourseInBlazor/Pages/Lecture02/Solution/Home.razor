@@ -1,0 +1,22 @@
+@page "/Pages/Lecture02/Solution/Home"
+@using ReactCourseInBlazor.Services
+@using ReactCourseInBlazor.Layout.Lecture02
+@layout LectureTwoSolutionLayout;
+
+@inject DataService DataService
+
+<MudStack AlignItems="AlignItems.Center">
+    <MudLink Href="/Pages/Lecture02/Solution/TaskOneSolution">L2 Task 01 Solution - Storage</MudLink>
+    <MudLink Href="/Pages/Lecture02/Solution/TaskTwoSolution">L2 Task 02 Solution - Ajax</MudLink>
+</MudStack>
+
+<MudDivider/>
+
+@code {
+
+    protected override void OnParametersSet()
+    {
+        DataService.ChangeLectureTwoTitle("L2 Task Solutions - Home");
+    }
+
+}

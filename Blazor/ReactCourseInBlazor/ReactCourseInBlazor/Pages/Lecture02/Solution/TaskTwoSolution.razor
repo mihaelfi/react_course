@@ -1,0 +1,13 @@
+@page "/Pages/Lecture02/Solution/TaskTwoSolution"
+@using ReactCourseInBlazor.Layout.Lecture02
+@layout LectureTwoSolutionLayout;
+@using ReactCourseInBlazor.Services
+@inject DataService DataService
+
+
+@code {
+    protected override void OnParametersSet()
+    {
+        DataService.ChangeLectureTwoTitle("L2 Task 02 Solution - Ajax");
+    }
+}
