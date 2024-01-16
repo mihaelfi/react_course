@@ -1,5 +1,6 @@
 @page "/Pages/Lecture01/Solution/Animals"
 @using ReactCourseInBlazor.Layout.Lecture01
+@using ReactCourseInBlazor.Common.Models.Lecture01
 @layout AnimalStoreMainLayout
 @inject HttpClient Http
 
@@ -13,7 +14,6 @@
                 <MudCard Elevation="20">
                     <MudPaper Outlined="true">
                         <img src="@entry.ImageSrc" alt="@entry.Description" class="fit-image"/>
-                        @* <MudCardMedia Image="assets/images/lecture01/animals/animals_01.png"></MudCardMedia> *@
                         <MudCardContent>
                             <MudText Typo="Typo.h5">@entry.Name</MudText>
                             <MudText Typo="Typo.body2">@entry.Description</MudText>
@@ -32,14 +32,7 @@
 
 @code {
 
-    private CardEntry[]? _cardEntries;
-
-    public class CardEntry
-    {
-        public string? Name { get; set; }
-        public string? Description { get; set; }
-        public string? ImageSrc { get; set; }
-    }
+    private AnimalCardEntry[]? _cardEntries;
 
 
     protected override void OnInitialized()
@@ -49,7 +42,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _cardEntries = await Http.GetFromJsonAsync<CardEntry[]>("sample-data/Lecture01/animals_listing.json");
+        _cardEntries = await Http.GetFromJsonAsync<AnimalCardEntry[]>("sample-data/Lecture01/animals_listing.json");
     }
 
 
