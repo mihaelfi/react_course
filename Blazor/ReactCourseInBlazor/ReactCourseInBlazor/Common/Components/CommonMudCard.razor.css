@@ -1,6 +1,5 @@
 .fit-image {
     width: 100%;  /* force to expand to container width  */
-    height: 250px; /* choose a height or set it to auto */
     object-fit: contain; /* cover or contain depending on needs (contain means to scale the image down to the resulting size if the image is too big */
     padding: 5px;
 }

@@ -1,0 +1,25 @@
+<MudCard Elevation="20">
+    <MudPaper Outlined="true">
+        <img src="@ItemImageSrc" alt="@ItemDescription" class="fit-image"/>
+        <MudCardContent>
+            <MudText Typo="Typo.h5">@ItemName</MudText>
+            <MudText Typo="Typo.body2">@ItemDescription</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Text" Color="Color.Primary">Adopt</MudButton>
+            <MudButton Variant="Variant.Text" Color="Color.Primary">Share</MudButton>
+        </MudCardActions>
+    </MudPaper>
+</MudCard>
+
+@code {
+
+    [Parameter]
+    public string? ItemImageSrc { get; set; }
+    
+    [Parameter]
+    public string? ItemDescription { get; set; }
+    
+    [Parameter]
+    public string? ItemName { get; set; }
+}

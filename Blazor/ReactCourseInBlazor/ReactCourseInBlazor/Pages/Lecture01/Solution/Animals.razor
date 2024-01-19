@@ -1,6 +1,7 @@
 @page "/Pages/Lecture01/Solution/Animals"
 @using ReactCourseInBlazor.Layout.Lecture01
 @using ReactCourseInBlazor.Common.Models.Lecture01
+@using ReactCourseInBlazor.Common.Components
 @layout AnimalStoreMainLayout
 @inject HttpClient Http
 
@@ -11,19 +12,7 @@
         foreach (var entry in _cardEntries)
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
-                <MudCard Elevation="20">
-                    <MudPaper Outlined="true">
-                        <img src="@entry.ImageSrc" alt="@entry.Description" class="fit-image"/>
-                        <MudCardContent>
-                            <MudText Typo="Typo.h5">@entry.Name</MudText>
-                            <MudText Typo="Typo.body2">@entry.Description</MudText>
-                        </MudCardContent>
-                        <MudCardActions>
-                            <MudButton Variant="Variant.Text" Color="Color.Primary">Adopt</MudButton>
-                            <MudButton Variant="Variant.Text" Color="Color.Primary">Share</MudButton>
-                        </MudCardActions>
-                    </MudPaper>
-                </MudCard>
+                <CommonMudCard ItemImageSrc="@entry.ImageSrc" ItemDescription="@entry.Description" ItemName="@entry.Name"/>
             </MudItem>
         }
     }
