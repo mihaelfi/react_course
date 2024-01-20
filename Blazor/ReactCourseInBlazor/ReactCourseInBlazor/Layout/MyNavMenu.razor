@@ -1,50 +1,87 @@
 @using System.Runtime.InteropServices.JavaScript
+@using ReactCourseInBlazor.Common.Models
+@using System.Runtime.InteropServices
+@using ReactCourseInBlazor.Services
+@inject HttpClient Http
+
 <MudNavMenu>
     <MudNavLink Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
     <MudNavGroup Title="Course Homework" Expanded="false">
-        @foreach(var navigationEntry in _navEntries)
+        @foreach (var navigationEntry in _navLectureModes)
         {
-            <MudNavGroup Title="@navigationEntry.Title" Expanded="false">
-                <MudNavLink Href="@navigationEntry.AssigmentPage" Match="NavLinkMatch.Prefix">Assignment</MudNavLink>
-                <MudNavLink Href="@navigationEntry.SolutionPage" Match="NavLinkMatch.Prefix">Solution</MudNavLink>
-            </MudNavGroup>    
+            var navTitle = $"L{navigationEntry.Index:0} - {navigationEntry.LectureDate.ToString("dd-MM-yy")} ";
+            <MudNavGroup Title="@navTitle" Expanded="false">
+                <MudNavGroup Title="Assignments" Expanded="false">
+                    @foreach (var assignment in navigationEntry?.LectureAssignments)
+                    {
+                        var assigmentTitle = $"{assignment.Index:0} - {assignment.Title}";
+                        <MudNavLink Href="@assignment.AssigmentPageRoute" Match="NavLinkMatch.Prefix">@assigmentTitle</MudNavLink>
+                    }
+                </MudNavGroup>
+                <MudNavGroup Title="Solutions" Expanded="false">
+                    @foreach (var assignment in navigationEntry?.LectureAssignments)
+                    {
+                        var assigmentTitle = $"{assignment.Index:0} - {assignment.Title}";
+                        <MudNavLink Href="@assignment.AssignmentSolutionRoute" Match="NavLinkMatch.Prefix">@assigmentTitle</MudNavLink>
+                    }
+                </MudNavGroup>
+                @* <MudNavLink Href="@navigationEntry?.LectureAssignments.First().AssigmentPageRoute" Match="NavLinkMatch.Prefix">Assignment</MudNavLink> *@
+                @* <MudNavLink Href="@navigationEntry.SolutionPage" Match="NavLinkMatch.Prefix">Solution</MudNavLink> *@
+            </MudNavGroup>
         }
     </MudNavGroup>
-    <MudNavLink Href="#"  Match="NavLinkMatch.Prefix">About</MudNavLink>
+    <MudNavLink Href="#" Match="NavLinkMatch.Prefix">About</MudNavLink>
 </MudNavMenu>
 
 @code
 {
-    private struct CourseHomeworkNavEntry
+    [Inject]
+    public LectureDataService LectrueService { get; set; }
+    
+    private List<LectureModel>? _navLectureModes = [];
+
+    protected override async void OnInitialized()
     {
-        public int Index { get; set; }
-        public string Title => $"L{Index:00} {Date.ToString("dd MMM yy")}";
-        public string AssigmentPage => $"/Pages/Lecture{Index:00}/Assignment";
-        public string SolutionPage => $"/Pages/Lecture{Index:00}/Solution/Home";
-        public DateOnly Date { get; set; }
+        _navLectureModes = LectrueService.Lectures;
+        StateHasChanged();
     }
 
-    private List<CourseHomeworkNavEntry> _navEntries =
-    [
-        new CourseHomeworkNavEntry
-        {
-            Index = 1,
-            Date = new DateOnly(2023, 12, 28),
-        },
-
-        new CourseHomeworkNavEntry
-        {
-            Index = 2,
-            Date = new DateOnly(2024, 01, 04),
-        },
-
-        new CourseHomeworkNavEntry
-        {
-            Index = 3,
-            Date = new DateOnly(2024, 01, 11),
-        }
-
-    ];
+    // private struct CourseHomeworkNavEntry
+    // {
+    //     public int Index { get; set; }
+    //     public string Title => $"L{Index:00} {Date.ToString("dd MMM yy")}";
+    //     public string AssigmentPage => $"/Pages/Lecture{Index:00}/Assignment";
+    //     public string SolutionPage => $"/Pages/Lecture{Index:00}/Solution/Home";
+    //     public DateOnly Date { get; set; }
+    // }
+    //
+    // private List<CourseHomeworkNavEntry> _navEntries =
+    // [
+    //     new CourseHomeworkNavEntry
+    //     {
+    //         Index = 1,
+    //         Date = new DateOnly(2023, 12, 28),
+    //     },
+    //
+    //     new CourseHomeworkNavEntry
+    //     {
+    //         Index = 2,
+    //         Date = new DateOnly(2024, 01, 04),
+    //     },
+    //
+    //     new CourseHomeworkNavEntry
+    //     {
+    //         Index = 3,
+    //         Date = new DateOnly(2024, 01, 11),
+    //     },
+    //     
+    //     new CourseHomeworkNavEntry
+    //     {
+    //         Index = 4,
+    //         Date = new DateOnly(2024, 01, 18),
+    //     }
+    //
+    // ];
 
 
 }

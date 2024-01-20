@@ -2,10 +2,8 @@ using ReactCourseInBlazor.Common.Models.Lecture01;
 
 namespace ReactCourseInBlazor.Services;
 
-public class DataService
+public class DataService: ServiceNotifyChange
 {
-    public event Action OnChange;
-    private void NotifyStateChanged() => OnChange?.Invoke();
     public ContactUsFormModel FormModel { get; set; } = new();
 
     public string? LectureTwoSolutionTitle { get; private set; }

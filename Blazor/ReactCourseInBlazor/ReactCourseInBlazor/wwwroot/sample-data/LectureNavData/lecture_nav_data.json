@@ -1,0 +1,159 @@
+[
+  {
+    "Index": 1,
+    "LectureDate": "2023-12-28",
+    "LectureAssignments": [
+      {
+        "Index": 1,
+        "Title": "Create an animal store website",
+        "AssigmentPageRoute": "/Pages/Lecture01/Assignment",
+        "AssignmentSolutionRoute": "/Pages/Lecture01/Solution/Home",
+        "AssignmentUrl": "https://docs.google.com/document/d/1Z4SRM9dTxz2WJdL7jS41_skl_DysPf2I",
+        "Tasks": [
+          {
+            "Index": 1,
+            "TaskDescription": "Create index.html, this should be the site's homepage"
+          },
+          {
+            "Index": 2,
+            "TaskDescription": "Create animals.html, this is page lists all animals available on the site"
+          },
+          {
+            "Index": 3,
+            "TaskDescription": "Create contact.html page where a user can leave feedback about the site"
+          },
+          {
+            "Index": 4,
+            "TaskDescription": "Create save.html, this page will be displayed when a user submits the form on contact.html"
+          },
+          {
+            "Index": 5,
+            "TaskDescription": "[Bonus] - After displaying the save page, redirect to the home page after x seconds."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Index": 2,
+    "LectureDate": "2024-01-04",
+    "LectureAssignments": [
+      {
+        "Index": 1,
+        "Title": "Storage",
+        "AssigmentPageRoute": "/Pages/Lecture02/Assignment",
+        "AssignmentSolutionRoute": "/Pages/Lecture02/Solution/Home",
+        "AssignmentUrl": "https://drive.google.com/drive/folders/1nb1dQ8YyBn44ShyI0WDMSQBtV5qeSLDm",
+        "Tasks": [
+          {
+            "Index": 1,
+            "TaskDescription": "Create a page with a save button, load button and a form."
+          },
+          {
+            "Index": 2,
+            "TaskDescription": "When the save button is pressed the form's content is saved into the browser storage. "
+          },
+          {
+            "Index": 3,
+            "TaskDescription": "When the load button pressed the data is filled back from the browser save data"
+          },
+          {
+            "Index": 4,
+            "TaskDescription": "[Bonus]: Make a persistent background color selector for the page. When the user selects a color, the background is in this color, and when he opens the page again this color remains."
+          }
+        ]
+      },
+      {
+        "Index": 2,
+        "Title": "Ajax",
+        "AssigmentPageRoute": "/Pages/Lecture02/Assignment",
+        "AssignmentSolutionRoute": "/Pages/Lecture02/Solution/Home",
+        "AssignmentUrl": "https://docs.google.com/document/d/1jfcZwDBVvLOax48T7a3tMx_TviMtzJ4v",
+        "Tasks": [
+          {
+            "Index": 1,
+            "TaskDescription": "Create a page with a button that makes a request to the following api: https://jsonplaceholder.typicode.com/photos on a press of the button."
+          },
+          {
+            "Index": 2,
+            "TaskDescription": "Disply the first 100 images returned from the request in a table."
+          },
+          {
+            "Index": 3,
+            "TaskDescription": "The table needs to have the following attributes: album id, id, title, and the image itself."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Index": 3,
+    "LectureDate": "2023-01-11",
+    "LectureAssignments": [
+      {
+        "Index": 1,
+        "Title": "Create a CV page for yourself.",
+        "AssigmentPageRoute": "/Pages/Lecture03/Assignment",
+        "AssignmentSolutionRoute": "/Pages/Lecture03/Solution/Home",
+        "AssignmentUrl": "https://docs.google.com/document/d/1WGR9E7kePXDC2ZKlZ1LMrasWZr2xH-qZ",
+        "Tasks": [
+          {
+            "Index": 1,
+            "TaskDescription": "The page has to have 3 sections, header, details and skills"
+          },
+          {
+            "Index": 2,
+            "TaskDescription": "Header contains the main title of the page"
+          },
+          {
+            "Index": 3,
+            "TaskDescription": "The details component gives general information about you"
+          },
+          {
+            "Index": 4,
+            "TaskDescription": "The skills component lists your skills in a list <ul> "
+          },
+          {
+            "Index": 5,
+            "TaskDescription": "The details pages also contains an image of you."
+          },
+          {
+            "Index": 6,
+            "TaskDescription": "Check the assignment url for a drawing of the page layout."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Index": 4,
+    "LectureDate": "2024-01-18",
+    "LectureAssignments": [
+      {
+        "Index": 1,
+        "Title": "Routing + Api Requests",
+        "AssigmentPageRoute": "/Pages/Lecture04/Assignment",
+        "AssignmentSolutionRoute": "/Pages/Lecture04/Solution/Home",
+        "AssignmentUrl": "https://docs.google.com/document/d/1-UY6T0g1al5W6pUX6dKWuHNC7l_cnYXq",
+        "Tasks": [
+          {
+            "Index": 1,
+            "TaskDescription": "Create a site for the employees of the Northwind company"
+          },
+          {
+            "Index": 2,
+            "TaskDescription": "The homepage contains a brief info on the company and shows the company's logo."
+          },
+          {
+            "Index": 3,
+            "TaskDescription": "The employees page has a table of the employees with the folowing data, first,last names, date of birth and an image"
+          },
+          {
+            "Index": 4,
+            "TaskDescription": "The about page contains the company's address and a list of countries and cities the company's employees hail from."
+          }
+        ]
+      }
+    ]
+  }
+]
