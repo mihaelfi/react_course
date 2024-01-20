@@ -1,0 +1,11 @@
+html, body, #root{
+  height: 100%;
+  text-align: center;
+  background-image: linear-gradient(10deg,darkgreen,red,darkgrey);
+  margin: 0;
+  padding: 0;
+}
+
+a{
+  color: blue;
+}

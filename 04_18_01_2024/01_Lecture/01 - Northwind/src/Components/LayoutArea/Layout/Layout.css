@@ -1,0 +1,21 @@
+.Layout {
+	height: 100%;
+    display: grid;
+    box-sizing: border-box;
+    grid-template-rows: 10% 85% 5%;
+    grid-template-columns: 1fr 5fr; /* fr = Fraction = יחידת מידה */
+}
+
+header, footer {
+    grid-column: span 2; /* תתפרס על שתי עמודות */
+}
+
+main {
+    overflow: auto; /* אם התוכן יגלוש, הצג גלילה */
+}
+
+.Layout, .Layout > * {
+    border: 1px solid;
+}
+
+

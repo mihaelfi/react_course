@@ -1,0 +1,8 @@
+.SupplierList table, th, td {
+    border: 1px solid;
+    text-align: center;
+    width: 100%;
+}
+.SupplierList table {
+    width: 100%;
+}

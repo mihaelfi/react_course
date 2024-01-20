@@ -1,0 +1,23 @@
+import { ProductModel } from "../../../Models/ProductModel";
+import "./ProductCard.css";
+
+type ProductCardProps = {
+    product: ProductModel;
+}
+
+function ProductCard(props: ProductCardProps): JSX.Element {
+    return (
+        <div className="ProductCard">
+            <div>
+                <span>Name:{props.product.name}</span>
+                <span>Price:{props.product.price}</span>
+                <span>Stock:{props.product.stock}</span>
+            </div>
+            <div>
+                <img src={props.product.imageUrl} alt={props.product.name}></img>
+            </div>
+        </div>
+    );
+}
+
+export default ProductCard;

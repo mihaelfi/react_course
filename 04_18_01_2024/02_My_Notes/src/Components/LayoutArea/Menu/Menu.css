@@ -1,0 +1,13 @@
+.Menu {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+	
+}
+
+
+.Menu .active{
+    color: green;
+    font-weight: bold;
+    font-family: David;
+}
